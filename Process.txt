@@ -1,0 +1,2 @@
+Đăng kí user xong -> Tới phần login, tọa roles(done) -> Tạo các bảng(done) -> hiển thị product (chuyển màu) -> hiển thị colorcode(done)->đổi color sp(done) -> đổi color ctsp(done) -> hiển thị modal(size giày- done) - xử lí button size gàiy(done) -> xử lí nút tăng giảm sluong(done) + xử lí lấy productcolorid đang nhấn vào(done) -> giao diện cart(done) -> xử lí gdien cart(done) -> xử lí checkout -> xủ lí voucher(xu li sau) -> Paypal(done) -> VNPay
+

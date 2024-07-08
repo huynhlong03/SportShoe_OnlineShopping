@@ -1,0 +1,91 @@
+﻿@model UserModel
+@{
+    ViewData["Title"] = "Đăng kí";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="register-container">
+    <h2>Đăng kí tài khoản</h2>
+    <form asp-action="Register" asp-controller="Account" method="post" class="register-form">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input asp-for="Name" type="text" placeholder="Họ tên">
+        <span asp-validation-for="Name" class="text-danger"></span>
+
+        <input asp-for="UserName" type="text" placeholder="Tên đăng nhập">
+        <span asp-validation-for="UserName" class="text-danger"></span>
+
+        <input asp-for="PhoneNumber" type="text" placeholder="Số điện thoại">
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+
+        <input asp-for="Address" type="text" placeholder="Địa chỉ (Vd: số nhà, đường)">
+        <span asp-validation-for="Address" class="text-danger"></span>
+
+        <input asp-for="City" type="text" placeholder="Thành phố">
+        <span asp-validation-for="City" class="text-danger"></span>
+
+        <input asp-for="District" type="text" placeholder="Quận, huyện">
+        <span asp-validation-for="District" class="text-danger"></span>
+
+        <input asp-for="Ward" type="text" placeholder="Phường, xã">
+        <span asp-validation-for="Ward" class="text-danger"></span>
+
+        <input asp-for="Email" type="email" placeholder="Email">
+        <span asp-validation-for="Email" class="text-danger"></span>
+
+        <input asp-for="Password" type="password" placeholder="Mật khẩu">
+        <span asp-validation-for="Password" class="text-danger"></span>
+
+
+        <input type="submit" value="Đăng kí" />
+        <a style="color:blue" asp-action="Login" asp-controller="Account">Đăng nhập</a>
+        <p>@ViewBag.Notice</p>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+<style>
+    /*register*/
+    .register-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: white; /* Nền trắng của trang đăng kí */
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding-top: 150px;
+    }
+
+        .register-container h2 {
+            text-align: center;
+        }
+
+    .register-form input[type="text"],
+    .register-form input[type="password"],
+    .register-form input[type="email"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    .register-form input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        background-color: #ff4e5b; /* Màu nền của nút đăng kí */
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+</style>
+
+

@@ -1,0 +1,394 @@
+﻿@model IEnumerable<SportShoes.Models.ViewModel.CartItem>
+
+@{
+    ViewData["Title"] = "Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+}
+
+
+<section class="bg-light py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-8 col-lg-8 mb-4">
+                
+                <form id="checkoutForm" asp-action="Checkout" asp-controller="Cart">
+                <!-- Checkout -->
+                <div class="card shadow-0 border">
+                    <div class="p-4">
+                        <h5 class="card-title mb-3 text-uppercase">Thông tin giao hàng</h5>
+                        <div class="row">
+                            <div class="col-12 mb-3">
+                                <p class="mb-0">Tên người nhận</p>
+                                <div class="form-outline">
+                                    <input name="Name" type="text" id="typeText" class="form-control" />
+                                </div>
+                            </div>
+
+                           
+
+                            <div class="col-6 mb-3">
+                                <p class="mb-0">Số điện thoại</p>
+                                <div class="form-outline">
+                                    <input name="PhoneNumber" type="tel" id="typePhone" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="col-6 mb-3">
+                                <p class="mb-0">Email</p>
+                                <div class="form-outline">
+                                    <input name="Email" type="email" id="typeEmail" placeholder="example@gmail.com" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+
+                       
+
+                        <div class="row">
+                            <div class="col-sm-12 mb-3">
+                                <p class="mb-0">Địa chỉ nhận hàng</p>
+                                <div class="form-outline">
+                                    <input name="Address" type="text" id="typeText" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 mb-3">
+                                <p class="mb-0">Thành phố</p>
+                                <select class="form-select" name="City" id="city">
+
+                                    <option value="">-- Thành phố</option>
+                                </select>
+                            </div>
+
+                            <div class="col-sm-4 mb-3">
+                                <p class="mb-0">Quận, huyện</p>
+                                <select class="form-select" name="District" id="district">
+
+                                    <option value="">-- Quận/huyện</option>
+                                </select>
+                            </div>
+
+                            <div class="col-sm-4 mb-3">
+                                <p class="mb-0">Phường xã</p>
+                                <select class="form-select" name="Ward" id="ward">
+
+                                    <option value="">-- Phường xã</option>
+                                </select>
+                            </div>
+
+                                <input type="hidden" name="CityText" id="CityText" value="">
+                                <input type="hidden" name="DistrictText" id="DistrictText" value="">
+                                <input type="hidden" name="WardText" id="WardText" value="">
+                               
+                                <div class="col-12 mb-3">
+                                    <p class="mb-0">Ghi chú đơn hàng</p>
+                                    <div class="form-outline">
+                                        <textarea type="text" class="form-control" name="Notes"></textarea>
+                                    </div>
+                                </div>
+                        </div>
+                        
+
+                       
+                    </div>
+                    <div class="p-4">
+                        <h5 class="card-title mb-3 text-uppercase">Phương thức thanh toán</h5>
+                        <div class="payment-methods">
+                            <!-- Chọn hình thức thanh toán -->
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="paymentMethod" id="paymentCOD" value="cod">
+                                <label class="form-check-label" for="paymentCOD">
+                                    <img class="form-check-img" src="https://www.coolmate.me/images/COD.svg" />
+                                    <span class="form-check-span">Thanh toán khi nhận hàng (COD)</span>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="paymentMethod" id="paymentMomo" value="momo">
+                                <label class="form-check-label" for="paymentMomo">
+                                    <img class="form-check-img" src="https://www.coolmate.me/images/momo-icon.png" />
+                                    <span class="form-check-span">Thanh toán qua Momo</span>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="paymentMethod" id="paymentVNPay" value="vnpay">
+                                <label class="form-check-label" for="paymentVNPay">
+                                    <img class="form-check-img" src="https://www.coolmate.me/images/vnpay.png" />
+                                    <span class="form-check-span">Thanh toán qua VN-PAY</span>
+                                </label>
+                            </div>
+                                @* <input type="hidden" id="selectedPaymentMethod" name="selectedPaymentMethod" value=""> *@
+                            <!-- Thêm các phương thức thanh toán khác tại đây nếu cần -->
+                        </div>
+
+                        <div class="float-end">
+                            <a asp-action="Index" asp-controller="Cart" class="btn btn-light rounded-pill py-2 btn-block mt-3">Giỏ hàng</a>
+                            <button type="submit" class="btn btn-dark rounded-pill py-2 btn-block mt-3">Xác nhận đặt hàng</button>
+                        </div>
+
+                            
+                    </div>
+                </div>
+
+                <!-- Checkout -->
+                </form>
+
+                <div id="paypal-button-container" class="form-item p-4"></div>
+            </div>
+
+           
+            <div class="col-xl-4 col-lg-4 d-flex justify-content-center justify-content-lg-end">
+                <div class="ms-lg-4 mt-4 mt-lg-0" style="max-width: 320px;">
+                    @foreach (var item in Model)
+                    {
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="me-3 position-relative">
+                            <span class="position-absolute top-0 start-100 translate-middle rounded-pill badge-secondary">
+                                @item.Quantity
+                            </span>
+                            <img src="~/product-img/@item.Images" style="height: 45px; width: 45px;" class="img-sm rounded border" />
+                        </div>
+                        <div class="">
+                            <a href="#" class="nav-link">
+                                @item.ProductName <br />
+                                Màu: @item.ColorName, Size: @item.SizeName
+                            </a>
+                            <div class="price text-muted">Total: @item.Total</div>
+                        </div>
+                    </div>
+
+                    }
+
+                    <hr />
+                    <div class="hrv-discount-choose-coupons">
+
+
+                        <div>
+                        <svg width="15" height="10" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M17.3337 5.3335V2.00016C17.3337 1.07516 16.5837 0.333496 15.667 0.333496H2.33366C1.41699 0.333496 0.675326 1.07516 0.675326 2.00016V5.3335C1.59199 5.3335 2.33366 6.0835 2.33366 7.00016C2.33366 7.91683 1.59199 8.66683 0.666992 8.66683V12.0002C0.666992 12.9168 1.41699 13.6668 2.33366 13.6668H15.667C16.5837 13.6668 17.3337 12.9168 17.3337 12.0002V8.66683C16.417 8.66683 15.667 7.91683 15.667 7.00016C15.667 6.0835 16.417 5.3335 17.3337 5.3335ZM15.667 4.11683C14.6753 4.69183 14.0003 5.77516 14.0003 7.00016C14.0003 8.22516 14.6753 9.3085 15.667 9.8835V12.0002H2.33366V9.8835C3.32533 9.3085 4.00033 8.22516 4.00033 7.00016C4.00033 5.76683 3.33366 4.69183 2.34199 4.11683L2.33366 2.00016H15.667V4.11683ZM9.83366 9.50016H8.16699V11.1668H9.83366V9.50016ZM8.16699 6.16683H9.83366V7.8335H8.16699V6.16683ZM9.83366 2.8335H8.16699V4.50016H9.83366V2.8335Z" fill="#318DBB"></path>
+                        </svg>
+                            <a onclick="openModal()">Xem thêm mã giảm giá</a>
+
+                         </div>
+                    </div>
+                        <div id="myModal" class="modal">
+                            <!-- Modal content -->
+                           
+                            <div class="modal-content">
+                                <span class="close" onclick="closeModal()">&times;</span>
+                                <div class="modal-tittle">
+                                    <h5>Mã giảm giá của shop</h5>
+                                </div>
+                                <div class="modal-body">
+                                    @if (ViewBag.Vouchers != null)
+                                    {
+                                        @foreach (var voucher in ViewBag.Vouchers)
+                                        {
+                                            <div class="coupon_item ">
+                                                <div class="coupon_icon pos-relative">
+                                                    <div class="coupon_body">
+
+                                                        <div class="coupon_head">
+
+                                                            <h3 class="coupon_title">
+                                                            <span id="voucherCodeSpan">@voucher.VoucherCode</span>
+                                                                <div class="coupon_exp">HSD: @voucher.ExpirationDate</div>
+                                                            </h3>
+                                                        </div>
+
+                                                        <div class="coupon_desc">
+                                                            <ul>
+                                                                <li>Giảm @voucher.Discount ₫ giá trị đơn hàng</li>
+                                                                <li>Mua tối thiểu @voucher.MinOrderAmount ₫ </li>
+                                                                <li>Áp dụng 1 lần cho toàn bộ đơn hàng</li>
+                                                            </ul>
+                                                        </div>			 
+                                                        <div class="coupon_actions">
+
+                                                        <button type="button" data-code="" class="btn btn-danger btn_apply_line_coupon">Áp dụng</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                                
+                            </div>
+                            
+                        </div>
+                        
+                    <div class="input-group mt-3 mb-4">
+                        <input id="appliedVoucherInput" type="text" value="" class="form-control border" />
+                        <button type="button" class="btn btn-dark">Sử dụng</button>
+                    </div>
+
+                        <hr />
+
+                        <div class="d-flex justify-content-between">
+                            <p class="mb-2">Tạm tính:</p>
+                            <p class="mb-2">@Model.Sum(s => s.Total)</p>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <p class="mb-2">Phí vận chuyển:</p>
+                            <p class="mb-2">+ 0 đ</p>
+                        </div>
+                        <hr />
+                        <div class="d-flex justify-content-between">
+                            <p class="mb-2">Tổng cộng:</p>
+                            <p class="mb-2 fw-bold">@Model.Sum(s => s.Total)</p>
+                        </div>
+
+                   
+                    
+               
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<script>
+    var citis = document.getElementById("city");
+    var districts = document.getElementById("district");
+    var wards = document.getElementById("ward");
+    var Parameter = {
+        url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
+        method: "GET",
+        responseType: "application/json",
+    };
+    var promise = axios(Parameter);
+    promise.then(function (result) {
+        renderCity(result.data);
+    });
+
+    function renderCity(data) {
+        for (const x of data) {
+            citis.options[citis.options.length] = new Option(x.Name, x.Id);
+        }
+        citis.onchange = function () {
+            district.length = 1;
+            ward.length = 1;
+            if (this.value != "") {
+                const result = data.filter(n => n.Id === this.value);
+
+                for (const k of result[0].Districts) {
+                    district.options[district.options.length] = new Option(k.Name, k.Id);
+                }
+            }
+        };
+        district.onchange = function () {
+            ward.length = 1;
+            const dataCity = data.filter((n) => n.Id === citis.value);
+            if (this.value != "") {
+                const dataWards = dataCity[0].Districts.filter(n => n.Id === this.value)[0].Wards;
+
+                for (const w of dataWards) {
+                    wards.options[wards.options.length] = new Option(w.Name, w.Id);
+                }
+            }
+        };
+    }
+</script>
+
+<script>
+    document.getElementById("checkoutForm").addEventListener("submit", function (event) {
+        // Ngăn chặn hành động mặc định của form
+        event.preventDefault();
+
+        // Lấy nội dung của các select
+        var citySelect = document.getElementById("city");
+        var selectedCityText = citySelect.options[citySelect.selectedIndex].textContent;
+
+        var districtSelect = document.getElementById("district");
+        var selectedDistrictText = districtSelect.options[districtSelect.selectedIndex].textContent;
+
+        var wardSelect = document.getElementById("ward");
+        var selectedWardText = wardSelect.options[wardSelect.selectedIndex].textContent;
+
+        // Gán nội dung vào các hidden input trong form
+        document.getElementById("CityText").value = selectedCityText;
+        document.getElementById("DistrictText").value = selectedDistrictText;
+        document.getElementById("WardText").value = selectedWardText;
+
+        // Submit form
+        this.submit();
+    });
+</script>
+
+
+<script>
+    // Mở modal
+    function openModal() {
+        var modal = document.getElementById('myModal');
+        modal.style.display = 'block';
+    }
+
+    // Đóng modal
+    function closeModal() {
+        var modal = document.getElementById('myModal');
+        modal.style.display = 'none';
+    }
+
+    // Khi tải xong trang
+    document.addEventListener("DOMContentLoaded", function () {
+        // Lấy modal
+        var modal = document.getElementById('myModal');
+
+        // Khi người dùng nhấp ra ngoài modal, đóng modal
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    });
+
+</script>
+
+<script src="https://www.paypal.com/sdk/js?client-id=@ViewBag.PaypalClientdId"></script>
+
+<script>
+    paypal.Buttons({
+        style: {
+            layout: 'vertical',
+            color: 'silver',
+            tagline: 'false',
+            shape: 'rect',
+            label: 'paypal'
+           
+        },
+        createOrder: (data, actions) => {
+            return fetch("/Cart/create-paypal-order", {
+                method: "post",
+            }).then((response) => {
+                if (!response.ok) {
+                    return response.json().then(error => { throw error; });
+                }
+
+                return response.json();
+            }).then((order) => order.id)
+                .catch(error => alert(error.message));
+        },
+        onApprove: (data, actions) => {
+            return fetch(`/Cart/capture-paypal-order?orderId=${data.orderID}`, {
+                method: "post",
+            }).then((response) => {
+                if (!response.ok) {
+                    return response.json().then(error => { throw error; });
+                }
+
+                //Đổi địa chỉ tới action thông báo thành công
+                window.location.href = "/Cart/CheckoutSuccess";
+            }).catch(error => alert(error.message));
+        }
+    }).render('#paypal-button-container');
+</script>
+

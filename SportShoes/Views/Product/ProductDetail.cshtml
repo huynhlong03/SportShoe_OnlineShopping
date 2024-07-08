@@ -1,0 +1,500 @@
+﻿@model SportShoes.Models.Product
+
+@{
+    ViewData["Title"] = "ProductDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+  
+}
+
+<div id="success-message" style="display: none;">
+    Thêm vào giỏ hàng thành công!
+    <a href="/Cart" class="elementor-button elementor-button--view-cart elementor-size-md">
+        <span class="elementor-button-text">Xem giỏ hàng >> </span>
+    </a>
+</div>
+
+<div class="layout_padding gallery_section">
+    <div class="container">
+        
+        <div class="row" style="padding-top: 20px">
+            <!-- Cột bên trái -->
+            <div class="col-6">
+                <!-- Hình ảnh sản phẩm -->
+                <img id="main-image" src="~/product-img/@Model.ProductColors.FirstOrDefault().Images" class="w-100" />
+                <!-- Sub images -->
+                <div class="pt-3">
+                    <img id="sub-image1" src="~/product-img/@Model.ProductColors.FirstOrDefault().Sub_Images1" style="width:24%" />
+                    <img id="sub-image2" src="~/product-img/@Model.ProductColors.FirstOrDefault().Sub_Images2" style="width:24%" />
+                    <img id="sub-image3" src="~/product-img/@Model.ProductColors.FirstOrDefault().Sub_Images3" style="width:24%" />
+                    <img id="sub-image4" src="~/product-img/@Model.ProductColors.FirstOrDefault().Sub_Images4" style="width:24%" />
+                </div>
+               
+            </div>
+
+            <div class="col-6">
+                <h2><strong>@Model.ProductName</strong></h2>
+                <dl class="row">
+                    <dd class="col-sm-12">
+                        <p>
+                            @Model.View lượt xem &nbsp;
+                        @Model.Purchares lượt mua</p>
+                    </dd>
+                    <dd class="col-sm-12">
+                        <h1><strong style="color:red">@string.Format("{0:#,0}", Model.Price) đ</strong></h1>
+                    </dd>
+                    <dt class="col-sm-3">
+                        Màu
+                    </dt>
+                    <dd class="col-sm-9">
+                        <ul class="list-inline">
+                            @foreach (var productColor in Model.ProductColors)
+                            {
+
+                                <li class="color-detail @(productColor == Model.ProductColors.First() ? "selected" : "")" data-product-color-id="@productColor.ProductColorID" data-color-id="@productColor.Color.ColorID" style="background-color: @productColor.Color.ColorCode" title="@productColor.Color.ColorName"></li>
+                                
+                                @*  <li class="color"  style="background-color: @productColor.Color.ColorCode" title="@productColor.Color.ColorName"></li> *@
+                                
+                            }
+                        </ul>
+                    </dd>
+                  
+                    <dt class="col-sm-3">
+                        Kích thước
+                    </dt>
+                    <dd class="col-sm-9">
+
+                        <!-- Thêm một lớp CSS mới vào nút -->
+                        <div id="size-buttons">
+                        </div>
+
+                    </dd>
+                    <dt class="col-sm-3">
+                        Còn:
+                    </dt>
+                    <dd class="col-sm-9" id="quantity-count">
+
+                        
+
+                    </dd>
+                    <dt class="col-sm-12" style="padding-bottom: 20px">
+                        <a class="text-decoration-underline" onclick="openModal()" >Hướng dẫn tính Size</a>
+                        <!-- The Modal -->
+                        
+                    </dt>
+                   @*  <form asp-action="AddToCart" asp-controller="Cart" asp-route-id="@Model.ProductID"> *@
+                    <dd class="col-sm-4">
+
+                        <button id="decrease-btn" onclick="decrement(event)" type="button" style="width: 50px; height:50px;">-</button>
+                            <input id="quantity" class="quantity-input" readonly  value="1" min="1" style="height:50px;" name="quantity">
+                        <button id="increase-btn" onclick="increment(event)" type="button" style="width: 50px; height:50px;">+</button>
+                       
+                    </dd>
+                    
+                    <dd class="col-sm-8">
+
+
+                        <button class="add-to-cart-btn" onclick="AddToCart(this)"><i class="fa-solid fa-cart-arrow-down"></i> Thêm vào giỏ hàng</button>
+                       
+                    </dd>
+                   @*  </form> *@
+                </dl>
+                <div id="myModal" class="modal">
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                        <span class="close" onclick="closeModal()">&times;</span>
+                        <div class="modal-tittle">
+                        <h2>HƯỚNG DẪN TÍNH SIZE</h2>
+                        </div>
+                        <div class="modal-body">
+                            <p><img src="https://img.mwc.com.vn/files/images/hd-size/step1-huong-dan-chon-size-giay-vascara_grande.jpg"></p>
+                                <p><h2>01. Vẽ khung bàn chân</h2>
+                                <span>&nbsp;</span>
+                                <span>Đặt bàn chân lên tờ giấy trắng, dùng bút đánh dấu theo khung bàn chân trên giấy</span>
+                            </p>
+                            <p><img src="https://img.mwc.com.vn/files/images/hd-size/step2-huong-dan-chon-size-giay-vascara_grande.jpg"></p>
+                                <p><h2>02. Đo chiều dài bàn chân</h2>
+                                <span>&nbsp;</span>
+                                <span>Dùng thước đo chiều dài lớn nhất từ mũi chân đến gót chân trên khung bàn chân đã đánh dấu</span>
+                            </p>
+                            <p><img src="https://img.mwc.com.vn/files/images/hd-size/step3-huong-dan-chon-size-giay-vascara_grande.jpg"></p>
+                            <p>
+                                <h2>03. Đo độ rộng vòng chân</h2>
+                                <span>&nbsp;</span>
+                                <span>Lấy thước dây quấn quanh 1 vòng bàn chân từ khớp ngón chân cái đến khớp ngón chân út</span>
+                            </p>
+                            <table width="570" height="168" style="text-align:center">
+                                <thead>
+                                    <tr>
+                                        <th>Size</th>
+                                        <th>Chiều dài chân (cm)</th>
+                                        <th>Chiều rộng chân (cm)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>35</td>
+                                        <td>23.1</td>
+                                        <td>20.7</td>
+                                    </tr>
+                                    <tr>
+                                        <td>36</td>
+                                        <td>23.8</td>
+                                        <td>21.1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>37</td>
+                                        <td>24.5</td>
+                                        <td>21.6</td>
+                                    </tr>
+                                    <tr>
+                                        <td>38</td>
+                                        <td>25.2</td>
+                                        <td>22.1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>39</td>
+                                        <td>25.8</td>
+                                        <td>22.6</td>
+                                    </tr>
+                                    <tr>
+                                        <td>40</td>
+                                        <td>26.4</td>
+                                        <td>23.1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>40</td>
+                                        <td>27.0</td>
+                                        <td>23.8</td>
+                                    </tr>
+                                    <tr>
+                                        <td>41</td>
+                                        <td>27.6</td>
+                                        <td>24.4</td>
+                                    </tr>
+                                    <tr>
+                                        <td>42</td>
+                                        <td>28.0</td>
+                                        <td>24.8</td>
+                                    </tr>
+                                    <tr>
+                                        <td>43</td>
+                                        <td>28.3</td>
+                                        <td>25.2</td>
+                                    </tr>
+                                    <!-- Các hàng khác -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-single__policy">
+                    <div class="product-policy">
+                        <div class="product-policy__item">
+                            <div class="product-policy__icon"><img src="https://img.mwc.com.vn/files/Icon/icon3.jpg" alt="Đổi trả với số điện thoại"></div> <span class="product-policy__title">
+                                Bảo hành keo vĩnh viễn
+                            </span>
+                        </div> <div class="product-policy__item">
+                            <div class="product-policy__icon"><img src="https://img.mwc.com.vn/files/Icon/icon4.jpg" alt="Miễn phí vận chuyển"></div> <span class="product-policy__title">
+                                Miễn phí vận chuyển toàn quốc<br> cho đơn hàng từ 150k
+                            </span>
+                        </div> <div class="product-policy__item">
+                            <div class="product-policy__icon"><img src="https://img.mwc.com.vn/files/Icon/icon5.jpg" alt="Đổi hàng trong 60 ngày"></div> <span class="product-policy__title">
+                                Đổi trả dễ dàng <br>  (trong vòng 7 ngày nếu lỗi nhà sản xuất)
+                            </span>
+                        </div> <div class="product-policy__item">
+                            <div class="product-policy__icon"><img src="https://img.mwc.com.vn/files/Icon/icon2.jpg" alt="" style="width: 25px;"></div> <span class="product-policy__title">
+                                Hotline 1900.633.349<br>
+                                hỗ trợ từ 8h30-21h30
+                            </span>
+                        </div> <div class="product-policy__item">
+                            <div class="product-policy__icon"><img src="https://img.mwc.com.vn/files/Icon/icon1.jpg" alt="Trả hàng tận nơi"></div> <span class="product-policy__title">
+                                Giao hàng tận nơi,<br> nhận hàng xong thanh toán
+                            </span>
+                        </div> <div class="product-policy__item">
+                            <div class="product-policy__icon"><img src="https://img.mwc.com.vn/files/Icon/icon3.jpg" alt="Giao hàng"></div> <span class="product-policy__title">
+                                Ưu đãi tích điểm và <br>hưởng quyền lợi thành viên
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 mt-5">
+                <dl class="row">
+
+                    @*<p style="text-align: left; padding: 0px 0px;"><strong>Name:</strong> @Model.BookName</p>*@
+
+                    <dt class="">
+                        <span style="font-size:10.5pt;font-family:Arial,sans-serif;color:#434343;background-color:#ffffff;font-weight:700;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">MÔ TẢ SẢN PHẨM : @Model.ProductName</span>
+                    </dt>
+                    <dd>
+                        
+                        @foreach (var sentence in Model.Description.Split('.'))
+                        {  
+                                <p>@sentence.Trim()</p>
+                        }
+                        
+                    </dd>
+                    <dt class="">
+                        <span style="font-size:10.5pt;font-family:Arial,sans-serif;color:#434343;background-color:#ffffff;font-weight:700;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">CHI TIẾT SẢN PHẨM</span>
+                    </dt>
+                    <dd  >
+                        @foreach (var sentence in Model.Detail.Split('.'))
+                        {
+                            var trimmedSentence = sentence.Trim();
+                            if (!string.IsNullOrEmpty(trimmedSentence))
+                            {
+                               
+
+                                <p>@sentence.Trim()</p>
+                            }
+                        }
+                    </dd>
+
+                </dl>
+            </div>
+        </div>
+       
+    </div>
+</div>
+
+<style>
+    #success-message {
+        display: none;
+        position: fixed;
+        top: 20px; /* Điều chỉnh khoảng cách từ trên xuống */
+        right: 20px; /* Điều chỉnh khoảng cách từ phải qua */
+        padding: 10px;
+        background-color: #4CAF50; /* Màu nền */
+        color: white; /* Màu chữ */
+        border-radius: 5px; /* Bo tròn các góc */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Hiển thị bóng */
+        z-index: 9999; /* Đảm bảo div hiển thị trên cùng */
+    }
+
+    .elementor-button.elementor-size-md {
+        font-size: 16px;
+        padding: 15px 30px;
+        border-radius: 4px;
+    }
+</style>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Đảm bảo thư viện jQuery được tải trước -->
+<script>
+    $(document).ready(function () {
+        // Mặc định chọn thẻ <li> đầu tiên khi trang được tải
+        var defaultSelectedColor = $('.color-detail.selected');
+        var productColorId = defaultSelectedColor.data('product-color-id');
+        var colorId = defaultSelectedColor.data('color-id');
+
+        changeColor(productColorId, colorId);
+
+        // Xử lý sự kiện khi nhấp vào một thẻ <li>
+        $('.color-detail').click(function () {
+            // Loại bỏ lớp 'selected' khỏi tất cả các thẻ <li> khác
+            $('.color-detail').removeClass('selected');
+            // Thêm lớp 'selected' cho thẻ <li> được nhấp vào
+            $(this).addClass('selected');
+
+            // Lấy productColorId và colorId từ thuộc tính data của thẻ <li> được nhấp vào
+            var productColorId = $(this).data('product-color-id');
+            var colorId = $(this).data('color-id');
+
+            // Thực thi hàm changeColor với productColorId và colorId mới
+            changeColor(productColorId, colorId);
+        });
+    });
+
+ 
+    function changeColor(productColorId, colorId) {
+        // Thực hiện yêu cầu AJAX để lấy đường dẫn ảnh tương ứng từ server
+        $.ajax({
+            url: '/Product/GetImagesByColorId', // Đường dẫn đến action trong controller để xử lý yêu cầu
+            method: 'GET',
+            data: { productColorId: productColorId, colorId: colorId }, // Truyền colorId và productColorId qua yêu cầu
+            success: function (response) {
+                // Nếu yêu cầu thành công, cập nhật ảnh trên sản phẩm đang được chọn
+                $('#main-image').attr('src', response.mainImage);
+                $('#sub-image1').attr('src', response.subImage1);
+                $('#sub-image2').attr('src', response.subImage2);
+                $('#sub-image3').attr('src', response.subImage3);
+                $('#sub-image4').attr('src', response.subImage4);
+
+                // Hiển thị các size
+                var sizes = response.sizes;
+                $('#size-buttons').empty();
+                sizes.forEach(function (size) {
+
+                    var buttonClass = size.quantity > 0 ? 'btn-default' : 'btn-disabled '; // Xác định lớp CSS cho nút
+                    var disabledAttribute = size.quantity > 0 ? '' : 'disabled'; // Xác định thuộc tính disabled
+                    $('#size-buttons').append('<button class="btn btn-default" ' + disabledAttribute + ' onclick="changeButtonClass(this); getSizeQuantity(' + response.productColorID + ', ' + size.sizeID + ')" style="margin-right:5px">' + size.sizeName + '</button>');
+                    
+                });
+
+                document.getElementById('quantity').value = 1;
+
+                $('#quantity-count').empty();
+            },
+            error: function () {
+                // Xử lý khi có lỗi xảy ra trong quá trình yêu cầu
+                console.log('Failed to get images for colorId: ' + colorId);
+            }
+        });
+    }
+    var getProductColorId = 0;
+    var getSizeId = 0;
+
+    var maxQuantity = 0; 
+    function getSizeQuantity(productColorId, sizeId) {
+        $.ajax({
+            url: '/Product/GetQuantityBySizeId',
+            method: 'GET',
+            data: { productColorId: productColorId, sizeId: sizeId },
+            success: function (response) {
+                maxQuantity = response.quantity; // Cập nhật maxQuantity với giá trị từ phản hồi
+                getProductColorId = productColorId;
+                getSizeId = sizeId;
+                $('#quantity-count').empty();
+                $('#quantity-count').append('<span style="color:black">' + response.quantity + '</span>');
+
+                document.getElementById('quantity').value = 1;
+            },
+            error: function () {
+                console.log('Failed to get quantity for sizeId: ' + sizeId);
+            }
+    
+        });
+       
+    }
+
+    function increment(event) {
+        event.preventDefault();
+        var quantityInput = document.getElementById('quantity');
+        var currentValue = parseInt(quantityInput.value);
+        if (currentValue < maxQuantity) {
+            quantityInput.value = currentValue + 1;
+        }
+    }
+
+    function decrement(event) {
+        event.preventDefault();
+        var quantityInput = document.getElementById('quantity');
+        var currentValue = parseInt(quantityInput.value);
+        if (currentValue > 1) {
+            quantityInput.value = currentValue - 1;
+        }
+    }
+    function showSuccessMessage() {
+        document.getElementById('success-message').style.display = 'block'; // Hiển thị div thông báo
+        setTimeout(function () {
+            document.getElementById('success-message').style.display = 'none'; // Ẩn div thông báo sau 3 giây
+        }, 3000); // 3000 milliseconds = 3 giây
+    }
+
+    function AddToCart(btn) {
+        var productColorId = getProductColorId;
+        var sizeId = getSizeId;
+        var quantity = parseInt(document.getElementById('quantity').value);
+        $.ajax({
+            url: '/Cart/AddToCart', // Đường dẫn đến action AddToCart trong controller Cart
+            method: 'POST',
+            data: { productColorId: productColorId, sizeId: sizeId, quantity: quantity }, // Truyền productColorId và sizeId qua yêu cầu
+            success: function (response) {
+                // Xử lý khi thêm vào giỏ hàng thành công (nếu cần)
+                showSuccessMessage();
+            },
+            error: function () {
+                // Xử lý khi có lỗi xảy ra trong quá trình thêm vào giỏ hàng
+                console.log('Failed to add to cart.');
+            }
+        });
+    }
+</script>
+
+<script>
+    // Mở modal
+    function openModal() {
+        var modal = document.getElementById('myModal');
+        modal.style.display = 'block';
+    }
+
+    // Đóng modal
+    function closeModal() {
+        var modal = document.getElementById('myModal');
+        modal.style.display = 'none';
+    }
+
+    // Khi tải xong trang
+    document.addEventListener("DOMContentLoaded", function () {
+        // Lấy modal
+        var modal = document.getElementById('myModal');
+
+        // Khi người dùng nhấp ra ngoài modal, đóng modal
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    });
+
+</script>
+
+<script>
+    var previousButton = null;
+
+    function changeButtonClass(btn) {
+        // Nếu button hiện tại không phải là button trước đó, thực hiện thay đổi style
+        if (previousButton !== btn) {
+            // Kiểm tra xem button trước đó có tồn tại không
+            if (previousButton !== null) {
+                previousButton.style.borderColor = ''; // Trả về màu viền mặc định
+            }
+
+            // Thay đổi màu viền cho button hiện tại
+            btn.style.borderColor = 'red';
+
+            // Cập nhật button trước đó
+            previousButton = btn;
+        } else {
+            // Nếu nhấn lại button đã được chọn, trở về trạng thái ban đầu
+            btn.style.borderColor = ''; // Trả về màu viền mặc định
+            previousButton = null;
+        }
+       
+    }
+</script>
+
+
+
+<script>
+    // Giả sử bạn có một biến lưu trữ description từ cơ sở dữ liệu
+    var descriptionFromDatabase = @Model.Description;
+    var detailDescriptionFromDatabase = @Model.Detail;
+
+    // Phân tách chuỗi thành mảng các câu
+    // Phân tách chuỗi thành mảng các câu
+    var descriptionSentences = descriptionFromDatabase.split('. ');
+    var detailDescriptionSentences = detailDescriptionFromDatabase.split('. ');
+
+    // Hàm chuyển đổi chữ cái đầu của một chuỗi thành chữ hoa
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    // Hiển thị mỗi câu trên một dòng trong phần mô tả sản phẩm
+    var productDescriptionDiv = document.getElementById('product-description');
+    descriptionSentences.forEach(function (sentence) {
+        var p = document.createElement('p');
+        p.textContent = capitalizeFirstLetter(sentence);
+        productDescriptionDiv.appendChild(p);
+    });
+
+    // Hiển thị mỗi câu trên một dòng trong phần mô tả chi tiết sản phẩm
+    var productDetailDescriptionDiv = document.getElementById('product-detail-description');
+    detailDescriptionSentences.forEach(function (sentence) {
+        var p = document.createElement('p');
+        p.textContent = capitalizeFirstLetter(sentence);
+        productDetailDescriptionDiv.appendChild(p);
+    });
+</script>
+
+

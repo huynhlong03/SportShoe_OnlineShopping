@@ -1,0 +1,225 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\assets\css\bootstrap.css" />
+    <Content Remove="wwwroot\assets\css\style-responsive.css" />
+    <Content Remove="wwwroot\assets\css\style.css" />
+    <Content Remove="wwwroot\assets\css\table-responsive.css" />
+    <Content Remove="wwwroot\assets\css\to-do.css" />
+    <Content Remove="wwwroot\assets\css\zabuto_calendar.css" />
+    <Content Remove="wwwroot\assets\font-awesome\css\font-awesome.css" />
+    <Content Remove="wwwroot\assets\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Remove="wwwroot\assets\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Remove="wwwroot\assets\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Remove="wwwroot\assets\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Remove="wwwroot\assets\font-awesome\fonts\FontAwesome.otf" />
+    <Content Remove="wwwroot\assets\fonts\glyphicons-halflings-regular.eot" />
+    <Content Remove="wwwroot\assets\fonts\glyphicons-halflings-regular.svg" />
+    <Content Remove="wwwroot\assets\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Remove="wwwroot\assets\fonts\glyphicons-halflings-regular.woff" />
+    <Content Remove="wwwroot\assets\img\blog-bg.jpg" />
+    <Content Remove="wwwroot\assets\img\checkbox-gray.png" />
+    <Content Remove="wwwroot\assets\img\friends\fr-01.jpg" />
+    <Content Remove="wwwroot\assets\img\friends\fr-02.jpg" />
+    <Content Remove="wwwroot\assets\img\friends\fr-03.jpg" />
+    <Content Remove="wwwroot\assets\img\friends\fr-04.jpg" />
+    <Content Remove="wwwroot\assets\img\friends\fr-05.jpg" />
+    <Content Remove="wwwroot\assets\img\friends\fr-06.jpg" />
+    <Content Remove="wwwroot\assets\img\friends\fr-07.jpg" />
+    <Content Remove="wwwroot\assets\img\friends\fr-08.jpg" />
+    <Content Remove="wwwroot\assets\img\friends\fr-09.jpg" />
+    <Content Remove="wwwroot\assets\img\friends\fr-10.jpg" />
+    <Content Remove="wwwroot\assets\img\friends\fr-11.jpg" />
+    <Content Remove="wwwroot\assets\img\instagram.jpg" />
+    <Content Remove="wwwroot\assets\img\login-bg.jpg" />
+    <Content Remove="wwwroot\assets\img\lorde.jpg" />
+    <Content Remove="wwwroot\assets\img\mask.png" />
+    <Content Remove="wwwroot\assets\img\ny.jpg" />
+    <Content Remove="wwwroot\assets\img\portfolio\port01.jpg" />
+    <Content Remove="wwwroot\assets\img\portfolio\port02.jpg" />
+    <Content Remove="wwwroot\assets\img\portfolio\port03.jpg" />
+    <Content Remove="wwwroot\assets\img\portfolio\port04.jpg" />
+    <Content Remove="wwwroot\assets\img\portfolio\port05.jpg" />
+    <Content Remove="wwwroot\assets\img\portfolio\port06.jpg" />
+    <Content Remove="wwwroot\assets\img\product.jpg" />
+    <Content Remove="wwwroot\assets\img\product.png" />
+    <Content Remove="wwwroot\assets\img\profile-01.jpg" />
+    <Content Remove="wwwroot\assets\img\profile-02.jpg" />
+    <Content Remove="wwwroot\assets\img\radio-gray.png" />
+    <Content Remove="wwwroot\assets\img\ui-danro.jpg" />
+    <Content Remove="wwwroot\assets\img\ui-divya.jpg" />
+    <Content Remove="wwwroot\assets\img\ui-sam.jpg" />
+    <Content Remove="wwwroot\assets\img\ui-sherman.jpg" />
+    <Content Remove="wwwroot\assets\img\ui-zac.jpg" />
+    <Content Remove="wwwroot\assets\img\weather.jpg" />
+    <Content Remove="wwwroot\assets\img\zoom.png" />
+    <Content Remove="wwwroot\assets\js\bootstrap-inputmask\bootstrap-inputmask.min.js" />
+    <Content Remove="wwwroot\assets\js\bootstrap-switch.js" />
+    <Content Remove="wwwroot\assets\js\bootstrap.min.js" />
+    <Content Remove="wwwroot\assets\js\calendar-conf-events.js" />
+    <Content Remove="wwwroot\assets\js\chart-master\Chart.js" />
+    <Content Remove="wwwroot\assets\js\chartjs-conf.js" />
+    <Content Remove="wwwroot\assets\js\common-scripts.js" />
+    <Content Remove="wwwroot\assets\js\easy-pie-chart.js" />
+    <Content Remove="wwwroot\assets\js\fancybox\jquery.fancybox.css" />
+    <Content Remove="wwwroot\assets\js\fancybox\jquery.fancybox.js" />
+    <Content Remove="wwwroot\assets\js\form-component.js" />
+    <Content Remove="wwwroot\assets\js\fullcalendar\bootstrap-fullcalendar.css" />
+    <Content Remove="wwwroot\assets\js\fullcalendar\fullcalendar.min.js" />
+    <Content Remove="wwwroot\assets\js\gritter-conf.js" />
+    <Content Remove="wwwroot\assets\js\gritter\css\jquery.gritter.css" />
+    <Content Remove="wwwroot\assets\js\gritter\css\jquery.gritter0.css" />
+    <Content Remove="wwwroot\assets\js\gritter\images\gritter-light.png" />
+    <Content Remove="wwwroot\assets\js\gritter\images\gritter-long.png" />
+    <Content Remove="wwwroot\assets\js\gritter\images\gritter.png" />
+    <Content Remove="wwwroot\assets\js\gritter\images\ie-spacer.gif" />
+    <Content Remove="wwwroot\assets\js\gritter\js\jquery.gritter.js" />
+    <Content Remove="wwwroot\assets\js\jquery-1.8.3.min.js" />
+    <Content Remove="wwwroot\assets\js\jquery-easy-pie-chart\jquery.easy-pie-chart.css" />
+    <Content Remove="wwwroot\assets\js\jquery-easy-pie-chart\jquery.easy-pie-chart.js" />
+    <Content Remove="wwwroot\assets\js\jquery-ui-1.9.2.custom.min.js" />
+    <Content Remove="wwwroot\assets\js\jquery.backstretch.min.js" />
+    <Content Remove="wwwroot\assets\js\jquery.dcjqaccordion.2.7.js" />
+    <Content Remove="wwwroot\assets\js\jquery.js" />
+    <Content Remove="wwwroot\assets\js\jquery.nicescroll.js" />
+    <Content Remove="wwwroot\assets\js\jquery.scrollTo.min.js" />
+    <Content Remove="wwwroot\assets\js\jquery.sparkline.js" />
+    <Content Remove="wwwroot\assets\js\jquery.tagsinput.js" />
+    <Content Remove="wwwroot\assets\js\jquery.ui.touch-punch.min.js" />
+    <Content Remove="wwwroot\assets\js\morris-conf.js" />
+    <Content Remove="wwwroot\assets\js\sparkline-chart.js" />
+    <Content Remove="wwwroot\assets\js\tasks.js" />
+    <Content Remove="wwwroot\assets\js\zabuto_calendar.js" />
+    <Content Remove="wwwroot\assets\lineicons\fonts\linecons.eot" />
+    <Content Remove="wwwroot\assets\lineicons\fonts\linecons.svg" />
+    <Content Remove="wwwroot\assets\lineicons\fonts\linecons.ttf" />
+    <Content Remove="wwwroot\assets\lineicons\fonts\linecons.woff" />
+    <Content Remove="wwwroot\assets\lineicons\index.html" />
+    <Content Remove="wwwroot\assets\lineicons\lte-ie7.js" />
+    <Content Remove="wwwroot\assets\lineicons\style.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\assets\css\bootstrap.css" />
+    <None Include="wwwroot\assets\css\style-responsive.css" />
+    <None Include="wwwroot\assets\css\style.css" />
+    <None Include="wwwroot\assets\css\table-responsive.css" />
+    <None Include="wwwroot\assets\css\to-do.css" />
+    <None Include="wwwroot\assets\css\zabuto_calendar.css" />
+    <None Include="wwwroot\assets\font-awesome\css\font-awesome.css" />
+    <None Include="wwwroot\assets\font-awesome\fonts\fontawesome-webfont.eot" />
+    <None Include="wwwroot\assets\font-awesome\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\assets\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <None Include="wwwroot\assets\font-awesome\fonts\fontawesome-webfont.woff" />
+    <None Include="wwwroot\assets\font-awesome\fonts\FontAwesome.otf" />
+    <None Include="wwwroot\assets\fonts\glyphicons-halflings-regular.eot" />
+    <None Include="wwwroot\assets\fonts\glyphicons-halflings-regular.svg" />
+    <None Include="wwwroot\assets\fonts\glyphicons-halflings-regular.ttf" />
+    <None Include="wwwroot\assets\fonts\glyphicons-halflings-regular.woff" />
+    <None Include="wwwroot\assets\img\blog-bg.jpg" />
+    <None Include="wwwroot\assets\img\checkbox-gray.png" />
+    <None Include="wwwroot\assets\img\friends\fr-01.jpg" />
+    <None Include="wwwroot\assets\img\friends\fr-02.jpg" />
+    <None Include="wwwroot\assets\img\friends\fr-03.jpg" />
+    <None Include="wwwroot\assets\img\friends\fr-04.jpg" />
+    <None Include="wwwroot\assets\img\friends\fr-05.jpg" />
+    <None Include="wwwroot\assets\img\friends\fr-06.jpg" />
+    <None Include="wwwroot\assets\img\friends\fr-07.jpg" />
+    <None Include="wwwroot\assets\img\friends\fr-08.jpg" />
+    <None Include="wwwroot\assets\img\friends\fr-09.jpg" />
+    <None Include="wwwroot\assets\img\friends\fr-10.jpg" />
+    <None Include="wwwroot\assets\img\friends\fr-11.jpg" />
+    <None Include="wwwroot\assets\img\instagram.jpg" />
+    <None Include="wwwroot\assets\img\login-bg.jpg" />
+    <None Include="wwwroot\assets\img\lorde.jpg" />
+    <None Include="wwwroot\assets\img\mask.png" />
+    <None Include="wwwroot\assets\img\ny.jpg" />
+    <None Include="wwwroot\assets\img\portfolio\port01.jpg" />
+    <None Include="wwwroot\assets\img\portfolio\port02.jpg" />
+    <None Include="wwwroot\assets\img\portfolio\port03.jpg" />
+    <None Include="wwwroot\assets\img\portfolio\port04.jpg" />
+    <None Include="wwwroot\assets\img\portfolio\port05.jpg" />
+    <None Include="wwwroot\assets\img\portfolio\port06.jpg" />
+    <None Include="wwwroot\assets\img\product.jpg" />
+    <None Include="wwwroot\assets\img\product.png" />
+    <None Include="wwwroot\assets\img\profile-01.jpg" />
+    <None Include="wwwroot\assets\img\profile-02.jpg" />
+    <None Include="wwwroot\assets\img\radio-gray.png" />
+    <None Include="wwwroot\assets\img\ui-danro.jpg" />
+    <None Include="wwwroot\assets\img\ui-divya.jpg" />
+    <None Include="wwwroot\assets\img\ui-sam.jpg" />
+    <None Include="wwwroot\assets\img\ui-sherman.jpg" />
+    <None Include="wwwroot\assets\img\ui-zac.jpg" />
+    <None Include="wwwroot\assets\img\weather.jpg" />
+    <None Include="wwwroot\assets\img\zoom.png" />
+    <None Include="wwwroot\assets\js\bootstrap-inputmask\bootstrap-inputmask.min.js" />
+    <None Include="wwwroot\assets\js\bootstrap-switch.js" />
+    <None Include="wwwroot\assets\js\bootstrap.min.js" />
+    <None Include="wwwroot\assets\js\calendar-conf-events.js" />
+    <None Include="wwwroot\assets\js\chart-master\Chart.js" />
+    <None Include="wwwroot\assets\js\chartjs-conf.js" />
+    <None Include="wwwroot\assets\js\common-scripts.js" />
+    <None Include="wwwroot\assets\js\easy-pie-chart.js" />
+    <None Include="wwwroot\assets\js\fancybox\jquery.fancybox.css" />
+    <None Include="wwwroot\assets\js\fancybox\jquery.fancybox.js" />
+    <None Include="wwwroot\assets\js\form-component.js" />
+    <None Include="wwwroot\assets\js\fullcalendar\bootstrap-fullcalendar.css" />
+    <None Include="wwwroot\assets\js\fullcalendar\fullcalendar.min.js" />
+    <None Include="wwwroot\assets\js\gritter-conf.js" />
+    <None Include="wwwroot\assets\js\gritter\css\jquery.gritter.css" />
+    <None Include="wwwroot\assets\js\gritter\css\jquery.gritter0.css" />
+    <None Include="wwwroot\assets\js\gritter\images\gritter-light.png" />
+    <None Include="wwwroot\assets\js\gritter\images\gritter-long.png" />
+    <None Include="wwwroot\assets\js\gritter\images\gritter.png" />
+    <None Include="wwwroot\assets\js\gritter\images\ie-spacer.gif" />
+    <None Include="wwwroot\assets\js\gritter\js\jquery.gritter.js" />
+    <None Include="wwwroot\assets\js\jquery-1.8.3.min.js" />
+    <None Include="wwwroot\assets\js\jquery-easy-pie-chart\jquery.easy-pie-chart.css" />
+    <None Include="wwwroot\assets\js\jquery-easy-pie-chart\jquery.easy-pie-chart.js" />
+    <None Include="wwwroot\assets\js\jquery-ui-1.9.2.custom.min.js" />
+    <None Include="wwwroot\assets\js\jquery.backstretch.min.js" />
+    <None Include="wwwroot\assets\js\jquery.dcjqaccordion.2.7.js" />
+    <None Include="wwwroot\assets\js\jquery.js" />
+    <None Include="wwwroot\assets\js\jquery.nicescroll.js" />
+    <None Include="wwwroot\assets\js\jquery.scrollTo.min.js" />
+    <None Include="wwwroot\assets\js\jquery.sparkline.js" />
+    <None Include="wwwroot\assets\js\jquery.tagsinput.js" />
+    <None Include="wwwroot\assets\js\jquery.ui.touch-punch.min.js" />
+    <None Include="wwwroot\assets\js\morris-conf.js" />
+    <None Include="wwwroot\assets\js\sparkline-chart.js" />
+    <None Include="wwwroot\assets\js\tasks.js" />
+    <None Include="wwwroot\assets\js\zabuto_calendar.js" />
+    <None Include="wwwroot\assets\lineicons\fonts\linecons.eot" />
+    <None Include="wwwroot\assets\lineicons\fonts\linecons.svg" />
+    <None Include="wwwroot\assets\lineicons\fonts\linecons.ttf" />
+    <None Include="wwwroot\assets\lineicons\fonts\linecons.woff" />
+    <None Include="wwwroot\assets\lineicons\index.html" />
+    <None Include="wwwroot\assets\lineicons\lte-ie7.js" />
+    <None Include="wwwroot\assets\lineicons\style.css" />
+    <None Include="wwwroot\js\site.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter" Version="8.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Models\" />
+  </ItemGroup>
+
+</Project>

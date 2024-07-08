@@ -1,0 +1,94 @@
+﻿@model IEnumerable<SportShoes.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="layout_padding gallery_section">
+    <div class="container">
+        <div class="row">
+        
+            @foreach(var item in Model)
+            {
+                <div class="col-sm-3">
+                    <div class="best_shoes">
+                        <a asp-controller="Product" asp-action="ProductDetail" asp-route-id="@item.ProductID">
+
+                        <div class="shoes_icon">
+                            <img id="product-image-@item.ProductID" src="/product-img/@item.ProductColors.FirstOrDefault().Images" /></div>
+  
+                            <div class="star_text">
+                               @*  <p class="best_text">@item.ProductName </p> *@
+                                @{
+                                    if (@item.ProductName.Length > 35)
+                                    {
+                                        <p class="best_text">@item.ProductName.Substring(0, 35)... </p>
+
+                                    }
+                                    else
+                                    {
+                                        <p class="best_text">@item.ProductName </p>
+                                        
+
+                                    }
+                                }
+                                
+                        
+                            </div>
+                        </a>
+                        <div class="left_part">
+
+
+                            @foreach (var productColor in item.ProductColors)
+                            {
+
+                                <ul>
+                                    <li class="color" onclick="changeColor(@productColor.ProductID, @productColor.ColorID)" style="background-color: @productColor.Color.ColorCode" title="@productColor.Color.ColorName"></li>
+                                    @* <li class="black" data-color-id="@productColor.ColorID" style="background-color: @productColor.Color.ColorCode" title="@productColor.Color.ColorName"></li> *@
+                                </ul>
+
+                            }
+                        </div>
+                        <div class="right_part">
+                            <div class="shoes_price">
+                                <span style="color: black;">@string.Format("{0:#,0}", item.Price)</span> đ
+                            </div>
+                        </div>
+                    </div>
+
+            </div>
+            
+            }
+           
+        <div class="buy_now_bt">
+            <button class="buy_text">Buy Now</button>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+
+    function changeColor(productId, colorId) {
+        // Tạo id cho ảnh của sản phẩm đang được chọn
+        var productImageId = '#product-image-' + productId;
+
+        // Thực hiện yêu cầu AJAX để lấy đường dẫn ảnh tương ứng từ server
+        $.ajax({
+            url: '/Product/GetProductColorImage', // Đường dẫn đến action trong controller để xử lý yêu cầu
+            method: 'GET',
+            data: { productId: productId, colorId: colorId }, // Truyền productId và colorId qua yêu cầu
+            success: function (response) {
+                // Nếu yêu cầu thành công, cập nhật ảnh trên sản phẩm đang được chọn
+                $(productImageId).attr('src', response);
+            },
+            error: function () {
+                // Xử lý khi có lỗi xảy ra trong quá trình yêu cầu
+                console.log('Failed to get image for productId: ' + productId + ' and colorId: ' + colorId);
+            }
+        });
+    }
+</script>
